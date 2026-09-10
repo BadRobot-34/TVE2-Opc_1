@@ -7,12 +7,8 @@
     html, body { width: 100%; height: 100%; margin: 0; padding: 0; background: #000; }
     #player { width: 100%; height: 100%; }
   </style>
-
-  <!-- Clappr Core -->
+  <!-- Clappr Core (incluye soporte nativo para HLS .m3u8) -->
   <script src="https://cdn.jsdelivr.net/npm/@clappr/player@latest/dist/clappr.min.js"></script>
-  <!-- Shaka Integration -->
-  <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.3.6/dist/shaka-player.compiled.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/dash-shaka-playback@latest/dist/dash-shaka-playback.js"></script>
 </head>
 <body>
 
@@ -20,18 +16,8 @@
 
 <script>
   var player = new Clappr.Player({
-    source: 'https://requestrouter3.cdn.agiletv.net/__cl/cg:lv-r1/__c/La2_HD/__op/dash-wv/__f/manifest.mpd',
+    source: 'https://rtvelivestream.rtve.es/rtvesec/la2/la2_main_dvr.m3u8',
     parentId: '#player',
-    plugins: [DashShakaPlayback],
-    shakaOnBeforeLoad: function(shakaPlayer) {
-      shakaPlayer.configure({
-        drm: {
-          clearKeys: {
-            'n9z7qqWWxGV4gx4Ou/kdjw': 'o3p1X1GQqXI/BUNdkshIZQ'
-          }
-        }
-      });
-    },
     autoPlay: true,
     mute: false,  // Audio activado por defecto
     volume: 100,  // Volumen al 100%
